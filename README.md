@@ -1,4 +1,4 @@
-# regen-injection-evidence
+# halcyon
 
 **A reproducible evidence map & meta-analysis, in R, of regenerative injections (PRP / prolotherapy) for joint hypermobility including hypermobile Ehlers–Danlos syndrome (hEDS).**
 
@@ -11,8 +11,8 @@ Nobody has consolidated this scattered literature. This project does two things:
 ## What's inside
 
 ```
-regen-injection-evidence/
-├── regen-injection-evidence.Rproj  # open THIS in RStudio
+halcyon/
+├── halcyon.Rproj  # open THIS in RStudio
 ├── data/studies.csv                # the coded studies (real descriptive data)
 ├── R/
 │   ├── 01_meta_analysis.R          # metafor: pooled effect + forest plot (poolable subset)
@@ -25,7 +25,7 @@ regen-injection-evidence/
 ## How to run it (in RStudio)
 
 1. **Install R and RStudio** (both free): https://posit.co/download/rstudio-desktop/
-2. **Open the project**: double-click `regen-injection-evidence.Rproj` (this sets the working directory correctly).
+2. **Open the project**: double-click `halcyon.Rproj` (this sets the working directory correctly).
 3. **Install the packages** (once), in the R console:
    ```r
    install.packages(c("metafor", "readr", "dplyr", "ggplot2"))

@@ -37,12 +37,12 @@ knitr::kable(studies |> select(authors, year, joint, intervention, design, n, di
 
 ## Part 1 — Meta-analysis (poolable subset)
 
-The TMJ dextrose-prolotherapy RCTs share a design, population, and comparable
-outcomes, so a pooled estimate is defensible. See `R/01_meta_analysis.R`.
-
-*Effect sizes must be extracted from the full-text papers; the script currently
-uses clearly-labelled synthetic placeholders so the workflow runs — replace them
-with real values before interpreting.*
+Real, cited effect sizes (see `R/01_meta_analysis.R` and `data/pooled_results.csv`).
+Independent meta-analyses agree dextrose prolotherapy reduces TMJ pain vs placebo:
+Sit et al. 2021 pooled SMD −0.76 (95% CI −1.19 to −0.32), I²=0%
+(doi:10.1038/s41598-021-94119-2); Nagori et al. 2018 pain MD −1.00 and mouth-opening
+MD −3.32 (doi:10.1111/joor.12698). Effects on mouth opening/function are inconsistent,
+evidence quality is low–moderate, and follow-up is short. All TMJ (jaw) only.
 
 ```{r}
 #| eval: false
