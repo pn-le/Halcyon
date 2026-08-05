@@ -45,7 +45,7 @@ People with joint hypermobility are often offered regenerative injections (PRP, 
 
 ![Forest plot](figures/forest_plot.png)
 
-*Published pooled estimate (Sit et al. 2021, 3 RCTs): standardized mean difference −0.76 (95% CI −1.19 to −0.32), favoring prolotherapy, with zero heterogeneity.*
+*On the SMD scale: the one placebo-controlled trial with extractable raw arms (Mustafa 2018, computed from scratch) shown against the published pooled estimate (Sit et al. 2021, 3 RCTs: SMD −0.76, 95% CI −1.19 to −0.32, I²=0%) as an independent cross-check. The analysis engine (`R/01_meta_analysis.R`) fits a random-effects pool with I², a 95% prediction interval, leave-one-out, and subgroup tests automatically once ≥2 controlled trials have raw arms in `data/raw/trial_arms.csv`; the remaining trials' arms are paywalled and flagged as TODO rather than imputed.*
 
 **Study selection (PRISMA flow)**
 
@@ -74,6 +74,7 @@ Halcyon/
 │   ├── raw/                 # source data, read-only (hand-curated)
 │   │   ├── studies.csv          # coded primary studies (the evidence map)
 │   │   ├── pooled_results.csv   # published pooled estimates, with DOIs
+│   │   ├── trial_arms.csv       # per-arm raw data for from-scratch pooling
 │   │   ├── prisma_counts.csv    # PRISMA record funnel (search log)
 │   │   └── rob.csv              # risk-of-bias coding per study
 │   └── processed/           # script-generated tables (git-ignored)

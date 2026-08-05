@@ -1,72 +1,121 @@
-# 01_meta_analysis.R  —  REAL DATA VERSION
+# 01_meta_analysis.R  —  from-scratch meta-analysis engine (real data)
 # ---------------------------------------------------------------------
-# Dextrose prolotherapy vs placebo for TMJ pain: real, cited effect sizes.
+# Dextrose prolotherapy vs placebo for TMJ pain, on the standardized-mean-
+# difference (SMD) scale. Per-trial raw arms live in data/raw/trial_arms.csv;
+# this script computes each trial's SMD and, WHEN >= 2 trials have extractable
+# raw data, fits a random-effects model reporting heterogeneity (I2, tau^2,
+# Q), a 95% prediction interval, leave-one-out, and subgroup moderator tests.
 #
-# SOURCES (all values below are from the published literature, via PubMed):
-#  - Sit et al. 2021, Sci Rep  (doi:10.1038/s41598-021-94119-2)
-#       Pooled TMJ pain @12wk, 3 RCTs (n=89): SMD -0.76 (95% CI -1.19,-0.32), I^2=0%
-#  - Nagori et al. 2018, J Oral Rehabil (doi:10.1111/joor.12698)
-#       TMJ hypermobility, 3 RCTs: pain MD -1.00 (-1.58,-0.42); MMO MD -3.32 (-5.26,-1.28)
-#  - Mustafa et al. 2018, J Craniofac Surg (doi:10.1097/SCS.0000000000004480)
-#       Raw post-tx VAS: 20% dextrose 0.55+/-0.72 (n=9) vs control 1.77+/-1.64 (n=9)
-#
-# HONESTY NOTES:
-#  - Most individual-trial raw tables are paywalled; Mustafa is computed from real raw data.
-#  - Refai 2011 reported pain as an ordinal % change -> cannot be pooled as a mean.
-#  - We do NOT re-pool the Sit 2021 summary WITH its component studies (overlap). We
-#    display the real estimates side by side. To build a from-scratch pool, add each
-#    trial's raw means/SDs/n to `raw` below as you obtain them.
+# HONESTY: only complete rows (all of m/sd/n for both arms) are used. Rows
+# still marked TODO are listed as pending, never imputed. Published pooled
+# estimates (data/raw/pooled_results.csv) are shown as an independent cross-
+# check — NOT re-pooled with their own component trials (that would double
+# count). See 02_evidence_map.R for the wider, un-poolable literature.
 
-# install.packages("metafor")   # run once
 library(metafor)
 
-# ---- (A) Real per-study raw data we could obtain ---------------------
-# Add rows here as you extract raw means/SDs/n from each trial's results table.
-raw <- data.frame(
-  study = "Mustafa 2018 (20%D vs control)",
-  m1i = 0.55, sd1i = 0.72, n1i = 9,   # dextrose arm (VAS pain, post-tx)
-  m2i = 1.77, sd2i = 1.64, n2i = 9,   # control arm
-  stringsAsFactors = FALSE
-)
-raw <- escalc(measure = "SMD",
-              m1i = raw$m1i, sd1i = raw$sd1i, n1i = raw$n1i,
-              m2i = raw$m2i, sd2i = raw$sd2i, n2i = raw$n2i,
-              data = raw)
-cat("Mustafa 2018 computed SMD:\n"); print(summary(raw)[, c("yi","vi")])
+# ---- (A) Per-trial raw arms -> SMD -----------------------------------
+arms <- read.csv("data/raw/trial_arms.csv", stringsAsFactors = FALSE)
+num  <- c("m1i","sd1i","n1i","m2i","sd2i","n2i")
+arms[num] <- lapply(arms[num], function(x) suppressWarnings(as.numeric(x)))
 
-# ---- (B) Published POOLED estimates (real, cited) --------------------
-# Convert reported 95% CI to a standard error:  SE = (upper - lower) / (2*1.96)
-pooled <- data.frame(
-  label = c("Sit 2021 pooled pain (k=3, n=89)"),
-  yi    = c(-0.76),
-  ci_lo = c(-1.19),
-  ci_hi = c(-0.32),
-  stringsAsFactors = FALSE
-)
-pooled$sei <- (pooled$ci_hi - pooled$ci_lo) / (2 * 1.96)
+complete <- arms[stats::complete.cases(arms[num]), ]
+pending  <- arms[!stats::complete.cases(arms[num]), ]
 
-# ---- (C) Forest plot of the REAL pain-SMD evidence -------------------
-# One computed single trial + the published pooled estimate, on the SMD scale.
-# (Not re-pooled: the Sit estimate already contains its own trials.)
-est   <- c(raw$yi[1], pooled$yi)
-se    <- c(sqrt(raw$vi[1]), pooled$sei)
-slab  <- c(as.character(raw$study), pooled$label)
+# Hedges' g (default SMD; small-sample corrected) with sampling variance
+complete <- escalc(measure = "SMD",
+                   m1i = complete$m1i, sd1i = complete$sd1i, n1i = complete$n1i,
+                   m2i = complete$m2i, sd2i = complete$sd2i, n2i = complete$n2i,
+                   data = complete)
+
+k <- nrow(complete)
+cat(sprintf("Controlled trials with extractable raw arms: k = %d\n", k))
+print(summary(complete)[, c("study","yi","vi")])
+if (nrow(pending)) {
+  cat("\nPending raw extraction (TODO from full text, not imputed):\n")
+  cat(" -", paste(pending$study, collapse = "\n - "), "\n")
+}
+
+# ---- (B) Random-effects pool + heterogeneity + sensitivity -----------
+res <- NULL
+if (k >= 2) {
+  res <- rma(yi, vi, data = complete, method = "REML", slab = complete$study)
+  cat("\n== Random-effects model (REML) ==\n"); print(res)
+
+  pi <- predict(res)
+  cat(sprintf("\nPooled SMD = %.2f (95%% CI %.2f, %.2f); 95%% prediction interval %.2f, %.2f\n",
+              res$b, res$ci.lb, res$ci.ub, pi$pi.lb, pi$pi.ub))
+  cat(sprintf("Heterogeneity: I^2 = %.1f%%, tau^2 = %.3f, Q(%d) = %.2f, p = %.3f\n",
+              res$I2, res$tau2, res$k - 1, res$QE, res$QEp))
+
+  cat("\n== Leave-one-out sensitivity ==\n")
+  print(leave1out(res))
+
+  # Subgroup moderator tests, run only where a factor has >= 2 levels each
+  # supported by >= 2 trials (otherwise not estimable -> reported as such).
+  for (mod in c("joint","agent","rob")) {
+    tab <- table(complete[[mod]])
+    if (sum(tab >= 2) >= 2) {
+      cat(sprintf("\n== Subgroup by %s ==\n", mod))
+      print(rma(yi, vi, mods = ~ factor(complete[[mod]]), data = complete, method = "REML"))
+    } else {
+      cat(sprintf("\n[subgroup by %s not estimable: subgroups too small]\n", mod))
+    }
+  }
+} else {
+  cat("\n[From-scratch pool not run: needs k >= 2 controlled trials with raw",
+      "arms; currently k =", k, ".]\n",
+      "Heterogeneity/prediction-interval/leave-one-out activate once >= 1 more",
+      "trial's raw arms are added to data/raw/trial_arms.csv.\n")
+
+  # Sensitivity we CAN run on the single computed effect: metric robustness.
+  # Hedges' g (small-sample corrected, above) vs uncorrected Cohen's d.
+  if (k == 1) {
+    n1 <- complete$n1i; n2 <- complete$n2i
+    J  <- 1 - 3 / (4 * (n1 + n2 - 2) - 1)   # Hedges correction factor
+    d  <- complete$yi / J                    # back out Cohen's d
+    cat(sprintf("\nMetric-robustness check (single trial):\n  Hedges g = %.2f, Cohen d = %.2f (J = %.3f)\n",
+                complete$yi, d, J))
+  }
+}
+
+# ---- (C) Published pooled estimates (real, cited cross-check) ---------
+pooled_tbl <- read.csv("data/raw/pooled_results.csv", stringsAsFactors = FALSE)
+cat("\nPublished pooled results (independent reviews; real reported heterogeneity):\n")
+print(pooled_tbl[, c("outcome","source_author","source_year","effect_type",
+                     "effect","ci_low","ci_high","i2_pct","favors")])
+
+# SMD-scale published pool(s) for the forest cross-check
+sit <- subset(pooled_tbl, effect_type == "SMD")
+sit$sei <- (sit$ci_high - sit$ci_low) / (2 * 1.96)
+
+# ---- (D) Forest plot (SMD scale) -------------------------------------
+# Computed trial SMD(s); the from-scratch pooled diamond if k>=2; and the
+# published SMD pool as a clearly-labeled external reference.
+est  <- complete$yi
+se   <- sqrt(complete$vi)
+slab <- as.character(complete$study)
+if (!is.null(res)) {                          # append from-scratch pooled row
+  est  <- c(est, as.numeric(res$b))
+  se   <- c(se,  res$se)
+  slab <- c(slab, sprintf("From-scratch pool (k=%d)", k))
+}
+est  <- c(est, sit$effect)                    # external published pool(s)
+se   <- c(se,  sit$sei)
+slab <- c(slab, sprintf("%s %s pool (external, k=%s)",
+                        sit$source_author, sit$source_year, sit$k_studies))
 
 dir.create("outputs", showWarnings = FALSE)
 png("outputs/forest_plot.png", width = 1100, height = 400, res = 120)
 forest(x = est, sei = se, slab = slab,
        header = c("Estimate (source)", "SMD [95% CI]"),
-       xlab = "Standardized mean difference (negative = less pain, favors dextrose)",
+       xlab = "Standardized mean difference (negative = less pain, favors prolotherapy)",
        refline = 0, psize = 1.2)
-title("Dextrose prolotherapy vs placebo for TMJ pain (real, cited data)")
+title("Dextrose prolotherapy vs placebo for TMJ pain (SMD; real data)")
 dev.off()
 
-# ---- (D) Print the wider published evidence table --------------------
-pooled_tbl <- read.csv("data/raw/pooled_results.csv", stringsAsFactors = FALSE)
-cat("\nPublished pooled results (see data/raw/pooled_results.csv):\n")
-print(pooled_tbl[, c("outcome","source_author","source_year","effect_type","effect","ci_low","ci_high","favors")])
-
-# BOTTOM LINE (real): independent meta-analyses agree that dextrose prolotherapy
-# reduces TMJ pain vs placebo (SMD ~ -0.76), with LOW heterogeneity, but effects on
-# mouth opening / function are inconsistent, evidence quality is low-moderate, and
-# follow-up is short. This is the jaw only; peripheral/hEDS joints remain unstudied by RCT.
+# BOTTOM LINE (real): independent published meta-analyses agree dextrose
+# prolotherapy reduces TMJ pain vs placebo (SMD ~ -0.76, I^2 = 0%), but effects
+# on mouth opening/function are inconsistent, quality is low-moderate, and
+# follow-up is short. This is the jaw only; peripheral/hEDS joints have no RCTs.
+# A fully from-scratch pool awaits raw arms for >= 1 more controlled trial.
