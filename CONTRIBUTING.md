@@ -1,6 +1,6 @@
-# Contributing to Halcyon
+# Contributing to Hypermobility Injection Evidence
 
-Thanks for your interest! Halcyon is an open, reproducible research project (an evidence map and meta-analysis of regenerative injections for joint hypermobility). Contributions — new studies, corrections, code improvements, or a review of the methods — are welcome.
+Thanks for your interest! Hypermobility Injection Evidence is an open, reproducible research project (an evidence map and meta-analysis of regenerative injections for joint hypermobility). Contributions — new studies, corrections, code improvements, or a review of the methods — are welcome.
 
 ## Ground rules (research integrity)
 
@@ -20,7 +20,7 @@ Thanks for your interest! Halcyon is an open, reproducible research project (an 
 
 ## Setup
 
-Install [R + RStudio](https://posit.co/download/rstudio-desktop/), open `halcyon.Rproj`, run `renv::restore()`, then `source("run_all.R")`.
+Install [R + RStudio](https://posit.co/download/rstudio-desktop/), open `hypermobility-injection-evidence.Rproj`, run `renv::restore()`, then `source("run_all.R")`.
 
 ## Reporting issues
 

@@ -1,7 +1,7 @@
-# Halcyon — Claude Code Build PRD
+# Hypermobility Injection Evidence — Claude Code Build PRD
 
-**Project:** Halcyon — a reproducible evidence map & meta-analysis of regenerative injections (dextrose prolotherapy, PRP) for joint hypermobility incl. hEDS.
-**Repo:** `github.com/pn-le/Halcyon` · **Local path:** `~/Desktop/Admin/halcyon`
+**Project:** Hypermobility Injection Evidence — a reproducible evidence map & meta-analysis of regenerative injections (dextrose prolotherapy, PRP) for joint hypermobility incl. hEDS.
+**Repo:** `github.com/pnle-research/hypermobility-injection-evidence` · **Local path:** `~/Desktop/Admin/hypermobility-injection-evidence`
 **Owner:** Phillips Le · **Version:** v1.1 (Aug 2026)
 
 **What this PRD is:** the spec for the **code/build work done in Claude Code.** Evidence gathering (literature search, extracting numbers) and prose writing happen separately in Cowork; this PRD assumes `data/` may still be growing and must never be filled with invented values.
@@ -9,7 +9,7 @@
 ---
 
 ## 1. Goal
-Turn Halcyon from a working analysis into a **proper reproducible research compendium** that (a) anyone can rebuild with one command, (b) reads like a real systematic review (PRISMA + risk-of-bias), (c) keeps its own data current via an automated fetcher, and (d) ships one memorable interactive artifact — all while staying scoping-level and honest.
+Turn Hypermobility Injection Evidence from a working analysis into a **proper reproducible research compendium** that (a) anyone can rebuild with one command, (b) reads like a real systematic review (PRISMA + risk-of-bias), (c) keeps its own data current via an automated fetcher, and (d) ships one memorable interactive artifact — all while staying scoping-level and honest.
 
 ## 2. Non-goals
 - Do **not** invent, estimate, or alter study data / effect sizes. Missing values → a clearly-marked `# TODO` and stop; never fabricate.
@@ -83,4 +83,4 @@ Fresh clone rebuilds everything with one command; README shows results + PRISMA 
 - Small commits; author Phillips Le; push to `main`. Fail loudly on missing deps/data.
 
 ## 9. Kickoff prompt for Claude Code (paste this)
-> "Read `Halcyon_ClaudeCode_PRD.md` in this repo. Start with P0 (compendium structure): split data into raw/processed, set up renv, and create run_all.R, updating the README reproduce section. Then do P1 (PRISMA + risk-of-bias figures). Make small commits and push to main. Never fabricate data — leave clearly-marked TODOs where numbers are missing, and stop rather than guessing."
+> "Read `Hypermobility Injection Evidence_ClaudeCode_PRD.md` in this repo. Start with P0 (compendium structure): split data into raw/processed, set up renv, and create run_all.R, updating the README reproduce section. Then do P1 (PRISMA + risk-of-bias figures). Make small commits and push to main. Never fabricate data — leave clearly-marked TODOs where numbers are missing, and stop rather than guessing."

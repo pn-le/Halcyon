@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="assets/banner.png" alt="Halcyon — reproducible evidence synthesis" width="100%">
-</p>
+# Hypermobility Injection Evidence
 
 <p align="center">
   <em>A reproducible evidence map and meta-analysis of regenerative injections (dextrose prolotherapy and platelet-rich plasma) for joint hypermobility, including hypermobile Ehlers–Danlos syndrome (hEDS).</em>
@@ -29,7 +27,7 @@
 
 ## About
 
-People with joint hypermobility are often offered regenerative injections (PRP, prolotherapy) to tighten lax, unstable joints — but the evidence is scattered and has never been consolidated. **Halcyon** gathers the published trials, pools the parts that are comparable, and maps the rest to show what is actually known and where the gaps are.
+People with joint hypermobility are often offered regenerative injections (PRP, prolotherapy) to tighten lax, unstable joints — but the evidence is scattered and has never been consolidated. This project gathers the published trials, pools the parts that are comparable, and maps the rest to show what is actually known and where the gaps are.
 
 **Headline finding:** dextrose prolotherapy has real (if modest, low-to-moderate quality) evidence for reducing pain in one hypermobile joint — the jaw (TMJ) — but the peripheral joints central to hEDS (shoulder, hip, knee, spine) have **no controlled trials at all.**
 
@@ -68,7 +66,7 @@ People with joint hypermobility are often offered regenerative injections (PRP, 
 ## Repository structure
 
 ```
-Halcyon/
+hypermobility-injection-evidence/
 ├── run_all.R                # one command rebuilds every figure & table
 ├── data/
 │   ├── raw/                 # source data, read-only (hand-curated)
@@ -90,7 +88,7 @@ Halcyon/
 ├── figures/                 # rendered figures shown above (tracked)
 ├── docs/data-dictionary.md  # what each data column means
 ├── renv.lock                # pinned R package versions
-└── halcyon.Rproj            # open this in RStudio
+└── hypermobility-injection-evidence.Rproj            # open this in RStudio
 ```
 
 ## Reproduce it

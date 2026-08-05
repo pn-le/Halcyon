@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
-title: "Halcyon: a reproducible evidence map and meta-analysis of regenerative injections for joint hypermobility"
+title: "Hypermobility Injection Evidence: a reproducible evidence map and meta-analysis of regenerative injections for joint hypermobility"
 type: software
 authors:
   - family-names: Le
@@ -8,7 +8,7 @@ authors:
 version: 0.1.0
 date-released: 2026-08-05
 license: MIT
-repository-code: "https://github.com/pn-le/Halcyon"
+repository-code: "https://github.com/pnle-research/hypermobility-injection-evidence"
 keywords:
   - meta-analysis
   - evidence synthesis

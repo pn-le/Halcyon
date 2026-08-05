@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""fetch_studies.py — automated study RETRIEVAL for Halcyon.
+"""fetch_studies.py — automated study RETRIEVAL for Hypermobility Injection Evidence.
 
 Queries PubMed (NCBI E-utilities) and ClinicalTrials.gov (API v2) for the
 review's terms and writes a candidate list to data/raw/candidates.csv with
@@ -66,7 +66,7 @@ def _norm_doi(d: str) -> str:
 
 # --- PubMed -----------------------------------------------------------------
 def fetch_pubmed(query: str, retmax: int, email: str | None) -> list[dict]:
-    common = {"db": "pubmed", "tool": "halcyon", "retmode": "json"}
+    common = {"db": "pubmed", "tool": "hypermobility-injection-evidence", "retmode": "json"}
     if email:
         common["email"] = email
 
@@ -110,7 +110,7 @@ def fetch_pubmed(query: str, retmax: int, email: str | None) -> list[dict]:
 
 def _fetch_pubmed_abstracts(ids: list[str], email: str | None) -> dict[str, str]:
     time.sleep(0.34)
-    params = {"db": "pubmed", "tool": "halcyon", "retmode": "xml",
+    params = {"db": "pubmed", "tool": "hypermobility-injection-evidence", "retmode": "xml",
               "rettype": "abstract", "id": ",".join(ids)}
     if email:
         params["email"] = email
@@ -184,7 +184,7 @@ def _is_known(row: dict, dois: set[str], author_year: list[tuple[str, str]]) -> 
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Fetch candidate studies for Halcyon.")
+    ap = argparse.ArgumentParser(description="Fetch candidate studies for Hypermobility Injection Evidence.")
     ap.add_argument("--max", type=int, default=50, help="max results per source")
     ap.add_argument("--email", default=None, help="contact email for NCBI E-utilities")
     ap.add_argument("--pubmed-query", default=PUBMED_QUERY)
