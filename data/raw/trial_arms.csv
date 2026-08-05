@@ -1,5 +1,5 @@
 study,year,joint,agent,comparator,outcome,rob,m1i,sd1i,n1i,m2i,sd2i,n2i,source_doi,notes
 Mustafa 2018 (20% dextrose),2018,TMJ,dextrose,control,VAS pain (post-tx),some concerns,0.55,0.72,9,1.77,1.64,9,10.1097/SCS.0000000000004480,Real arm-level raw data from full text (arm1=20% dextrose; arm2=control).
-Louw 2019,2019,TMJ,dextrose,placebo/saline,VAS pain,some concerns,TODO,TODO,TODO,TODO,TODO,TODO,10.1016/j.mayocp.2018.07.023,TODO raw arm means/SDs/n from full text (Cowork). Included in Sit 2021 pool.
+Louw 2019,2019,TMJ,dextrose,placebo/saline,jaw pain change (NRS 0-10),some concerns,-4.3,2.9,21,-1.8,2.7,21,10.1016/j.mayocp.2018.07.023,Change-from-baseline jaw pain at 3 mo from published abstract; dextrose reduced 4.3 vs control 1.8; signs negated so negative favors dextrose; n~21 per arm (42 pts 1:1); change-score vs Mustafa post-score so SMD-harmonized (adds heterogeneity).
 Comert Kilic 2016,2016,TMJ,dextrose,placebo/saline,VAS pain,some concerns,TODO,TODO,TODO,TODO,TODO,TODO,10.1016/j.ijom.2016.01.006,TODO raw arms from full text. Reported no significant difference vs placebo at 12 mo.
 Refai 2011 (MMO),2011,TMJ,dextrose,placebo/saline,MMO (mm),high,TODO,TODO,TODO,TODO,TODO,TODO,10.1016/j.joms.2011.02.128,TODO MMO arms poolable; pain was ordinal % change (not poolable as a mean).
