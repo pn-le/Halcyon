@@ -1,0 +1,11 @@
+key,count,description
+database_records,TODO,Records identified from database searching (PubMed/MEDLINE etc.; include citation/hand-searching hits here)
+register_records,TODO,Records identified from trial registers (ClinicalTrials.gov)
+duplicates_removed,TODO,Duplicate records removed before screening
+records_screened,TODO,Records screened at title/abstract
+records_excluded,TODO,Records excluded at title/abstract screening
+fulltext_sought,TODO,Full-text reports sought for retrieval
+fulltext_not_retrieved,TODO,Full-text reports not retrieved
+fulltext_assessed,TODO,Full-text reports assessed for eligibility
+fulltext_excluded,TODO,Full-text reports excluded (with reasons)
+studies_included,8,Primary studies included in the evidence map (rows in studies.csv)
