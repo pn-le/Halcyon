@@ -1,9 +1,12 @@
 study_id,study,design,tool,d1,d2,d3,d4,d5,overall
-1,Louw et al. 2019,RCT,ROB2,TODO,TODO,TODO,TODO,TODO,TODO
-2,Comert Kilic 2016,RCT,ROB2,TODO,TODO,TODO,TODO,TODO,TODO
-3,Refai et al. 2011,RCT,ROB2,TODO,TODO,TODO,TODO,TODO,TODO
-4,Mustafa et al. 2018,RCT,ROB2,TODO,TODO,TODO,TODO,TODO,TODO
-5,Michalak et al. 2024,case_series,ROBINS-I,TODO,TODO,TODO,TODO,TODO,TODO
-6,SI-joint EDS study 2025,retrospective,ROBINS-I,TODO,TODO,TODO,TODO,TODO,TODO
-7,PRP SI-joint study 2016,case_series,ROBINS-I,TODO,TODO,TODO,TODO,TODO,TODO
-8,Hackett-Hemwall series,case_series,ROBINS-I,TODO,TODO,TODO,TODO,TODO,TODO
+1,Louw et al. 2019,RCT,ROB2,Low,Some concerns,Low,Some concerns,Some concerns,Some concerns
+2,Comert Kilic 2016,RCT,ROB2,Some concerns,Some concerns,Low,Some concerns,Some concerns,Some concerns
+3,Refai et al. 2011,RCT,ROB2,Some concerns,Some concerns,Some concerns,High,Some concerns,High
+4,Mustafa et al. 2018,RCT,ROB2,Some concerns,Some concerns,Low,Some concerns,Some concerns,Some concerns
+9,Taskesen & Cezairli 2020,RCT,ROB2,Some concerns,Some concerns,Some concerns,Some concerns,Some concerns,Some concerns
+5,Michalak et al. 2024,case_series,ROBINS-I,Serious,Moderate,Moderate,Moderate,Moderate,Serious
+6,SI-joint EDS study 2025,retrospective,ROBINS-I,Serious,Serious,Moderate,Moderate,Moderate,Serious
+7,PRP SI-joint study 2016,case_series,ROBINS-I,Serious,Moderate,Moderate,Moderate,Moderate,Serious
+8,Hackett-Hemwall series,case_series,ROBINS-I,Critical,Serious,Serious,Serious,Serious,Critical
+10,Medina-Porqueres et al. 2024,case_series,ROBINS-I,Serious,Moderate,Moderate,Moderate,Moderate,Serious
+11,Hoffman & Agnish 2018,retrospective,ROBINS-I,Serious,Serious,Moderate,Moderate,Moderate,Serious

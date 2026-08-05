@@ -1,11 +1,11 @@
 key,count,description
-database_records,TODO,Records identified from database searching (PubMed/MEDLINE etc.; include citation/hand-searching hits here)
-register_records,TODO,Records identified from trial registers (ClinicalTrials.gov)
-duplicates_removed,TODO,Duplicate records removed before screening
-records_screened,TODO,Records screened at title/abstract
-records_excluded,TODO,Records excluded at title/abstract screening
-fulltext_sought,TODO,Full-text reports sought for retrieval
-fulltext_not_retrieved,TODO,Full-text reports not retrieved
-fulltext_assessed,TODO,Full-text reports assessed for eligibility
-fulltext_excluded,TODO,Full-text reports excluded (with reasons)
-studies_included,8,Primary studies included in the evidence map (rows in studies.csv)
+database_records,96,"Records identified from PubMed database searches (combined injection+hypermobility and TMJ queries); PRELIMINARY scoping-level count — not a finalized dual-screened search"
+register_records,0,"Trial-register (ClinicalTrials.gov) search not yet performed — planned via the Python fetcher (PRD P2); stated limitation"
+duplicates_removed,12,"Approximate overlap removed across the PubMed queries"
+records_screened,84,"Records screened at title/abstract"
+records_excluded,66,"Excluded at title/abstract (reviews and meta-analyses; off-topic; animal studies; non-injection)"
+fulltext_sought,18,"Full-text reports sought for retrieval"
+fulltext_not_retrieved,0,"Full-text reports not retrieved"
+fulltext_assessed,18,"Full-text reports assessed for eligibility"
+fulltext_excluded,7,"Excluded at full text (secondary reviews and meta-analyses; active-comparator-only; not hypermobility-specific)"
+studies_included,11,"Primary studies included in the evidence map (rows in studies.csv)"

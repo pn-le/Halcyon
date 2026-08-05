@@ -25,6 +25,18 @@ People with joint hypermobility are often offered regenerative injections (PRP, 
 
 *Published pooled estimate (Sit et al. 2021, 3 RCTs): standardized mean difference −0.76 (95% CI −1.19 to −0.32), favoring prolotherapy, with zero heterogeneity.*
 
+**Study selection (PRISMA flow)**
+
+![PRISMA flow](figures/prisma.png)
+
+*Preliminary, scoping-level record funnel from the literature search: 11 primary studies included across 5 joints. A finalized dual-screened search is future work.*
+
+**Risk of bias (RCTs)**
+
+![Risk of bias](figures/rob.png)
+
+*RoB 2 assessment of the controlled trials — mostly "some concerns," reflecting small samples and reporting limitations. First-pass judgments, to be confirmed by a second rater.*
+
 ## What this shows
 
 - Independent meta-analyses agree dextrose prolotherapy reduces **TMJ pain** vs placebo (pooled SMD ≈ −0.76, low heterogeneity).
@@ -72,9 +84,12 @@ copied into `figures/` (tracked). Optionally render the full report with
 
 > **Note.** `R/03_prisma.R` and `R/04_risk_of_bias.R` render the PRISMA flow
 > diagram and risk-of-bias plot from `data/raw/prisma_counts.csv` and
-> `data/raw/rob.csv`. Those files ship as templates: until the real search-log
-> counts and per-study appraisals are entered, both scripts **skip** rather than
-> invent numbers, and `run_all.R` still rebuilds everything else.
+> `data/raw/rob.csv`. These are now populated from the literature search
+> (11 primary studies) — the counts are a **preliminary, scoping-level** funnel
+> and the RoB judgments are first-pass, both flagged as such. If any value is
+> reset to `TODO`, the scripts safely **skip** rather than invent numbers.
+> (`03_prisma.R` uses the official PRISMA2020 renderer when pandoc is available,
+> e.g. inside RStudio, and a dependency-free fallback otherwise.)
 
 ## Data & sources
 
