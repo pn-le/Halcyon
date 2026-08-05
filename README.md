@@ -1,9 +1,31 @@
-# Halcyon
+<p align="center">
+  <img src="assets/banner.png" alt="Halcyon — reproducible evidence synthesis" width="100%">
+</p>
 
-*A reproducible evidence map and meta-analysis of regenerative injections (dextrose prolotherapy and platelet-rich plasma) for joint hypermobility, including hypermobile Ehlers–Danlos syndrome (hEDS).*
+<p align="center">
+  <em>A reproducible evidence map and meta-analysis of regenerative injections (dextrose prolotherapy and platelet-rich plasma) for joint hypermobility, including hypermobile Ehlers–Danlos syndrome (hEDS).</em>
+</p>
 
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![Made with R](https://img.shields.io/badge/Made%20with-R-1f65b7.svg)
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/Made%20with-R-1f65b7.svg" alt="Made with R">
+  <img src="https://img.shields.io/badge/analysis-metafor-2ea44f.svg" alt="metafor">
+  <img src="https://img.shields.io/badge/reporting-Quarto-4b8bbe.svg" alt="Quarto">
+  <img src="https://img.shields.io/badge/reproducible-renv-orange.svg" alt="renv">
+  <img src="https://img.shields.io/badge/status-work--in--progress-yellow.svg" alt="status: work in progress">
+</p>
+
+## Contents
+
+- [About](#about)
+- [Key results](#key-results)
+- [What this shows](#what-this-shows)
+- [Repository structure](#repository-structure)
+- [Reproduce it](#reproduce-it)
+- [Data & sources](#data--sources)
+- [How to cite](#how-to-cite)
+- [License](#license)
+- [Disclaimer](#disclaimer)
 
 ## About
 
