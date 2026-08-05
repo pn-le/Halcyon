@@ -1,0 +1,9 @@
+outcome,comparison,population,source_author,source_year,k_studies,n_total,effect_type,effect,ci_low,ci_high,i2_pct,favors,doi,notes
+TMJ pain (12 wk),prolotherapy vs placebo,TMD,Sit,2021,3,89,SMD,-0.76,-1.19,-0.32,0,prolotherapy,10.1038/s41598-021-94119-2,"negative SMD = less pain; moderate-large effect; low heterogeneity"
+TMJ pain,prolotherapy vs placebo,TMJ hypermobility,Nagori,2018,3,NA,MD_VAS,-1.00,-1.58,-0.42,0,prolotherapy,10.1111/joor.12698,"negative = pain reduction favoring dextrose"
+Maximal mouth opening,prolotherapy vs placebo,TMJ hypermobility,Nagori,2018,3,NA,MD_mm,-3.32,-5.26,-1.28,0,prolotherapy(stability),10.1111/joor.12698,"reduced MMO seen as favorable for subluxation stability"
+Subluxation/dislocation freq,prolotherapy vs placebo,TMJ hypermobility,Nagori,2018,2,NA,narrative,NA,NA,NA,NA,none,10.1111/joor.12698,"no difference vs placebo"
+VAS pain,prolotherapy vs placebo,TMD,Saramantos,2025,6,NA,MD,1.20,0.56,1.84,NA,prolotherapy,10.3390/clinpract15030051,"positive sign favors prolotherapy (opposite convention)"
+Perceived jaw mobility,prolotherapy vs placebo,TMD,Saramantos,2025,NA,NA,MD,0.47,0.05,0.90,NA,prolotherapy,10.3390/clinpract15030051,""
+Maximal incisor opening,prolotherapy vs placebo,TMD,Saramantos,2025,NA,NA,MD,0.84,-2.12,3.80,NA,none(ns),10.3390/clinpract15030051,"not significant; high heterogeneity"
+Pain & mouth opening,prolotherapy vs placebo,TMJ hypermobility,Zhou,2024,8,NA,narrative,NA,NA,NA,NA,prolotherapy,10.1080/08869634.2024.2419845,"low-quality evidence; pain & MMO improved vs placebo"
