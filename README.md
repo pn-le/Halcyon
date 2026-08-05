@@ -82,6 +82,9 @@ Halcyon/
 │   ├── 02_evidence_map.R    # evidence map + summaries (ggplot2)
 │   ├── 03_prisma.R          # PRISMA 2020 flow diagram (PRISMA2020)
 │   └── 04_risk_of_bias.R    # risk-of-bias traffic-light plot (robvis)
+├── python/
+│   ├── fetch_studies.py     # PubMed + ClinicalTrials.gov study fetcher
+│   └── requirements.txt     # Python dependencies
 ├── report/evidence-synthesis.qmd   # Quarto report tying it together
 ├── figures/                 # rendered figures shown above (tracked)
 ├── docs/data-dictionary.md  # what each data column means
@@ -112,6 +115,22 @@ copied into `figures/` (tracked). Optionally render the full report with
 > reset to `TODO`, the scripts safely **skip** rather than invent numbers.
 > (`03_prisma.R` uses the official PRISMA2020 renderer when pandoc is available,
 > e.g. inside RStudio, and a dependency-free fallback otherwise.)
+
+### Keeping it current
+
+`python/fetch_studies.py` automates *retrieval* (not inclusion): it queries
+PubMed and ClinicalTrials.gov for the review's terms and writes a candidate list
+to `data/raw/candidates.csv`, flagging papers not already in `studies.csv` as
+`NEW`. Inclusion and appraisal stay a human decision — the fetcher never edits
+the curated data.
+
+```bash
+pip install -r python/requirements.txt
+python python/fetch_studies.py --email you@example.com
+```
+
+The candidate list is regenerated on each run and is git-ignored. You can also
+call it from R via `reticulate::py_run_file("python/fetch_studies.py")`.
 
 ## Data & sources
 
