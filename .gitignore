@@ -1,0 +1,16 @@
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj.bak
+
+# generated outputs
+outputs/
+*_files/
+*.html
+!report/*.qmd
+
+# OS/editor
+.DS_Store
+.vscode/

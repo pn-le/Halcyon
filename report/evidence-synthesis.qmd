@@ -1,0 +1,80 @@
+---
+title: "Regenerative Injections for Joint Hypermobility: A Reproducible Evidence Map and Meta-Analysis"
+author: "Phillips Le"
+date: today
+format:
+  html:
+    toc: true
+    code-fold: true
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+---
+
+## Summary
+
+This report synthesizes the published evidence on regenerative injections
+(dextrose prolotherapy and platelet-rich plasma, PRP) for joint hypermobility,
+including hypermobile Ehlers–Danlos syndrome (hEDS). It has two parts: a
+**targeted meta-analysis** of the small subset of studies that are comparable
+enough to pool (the TMJ prolotherapy RCTs), and an **evidence map** of the wider,
+un-poolable literature. The honest headline: the evidence base is small,
+lopsided (controlled trials exist only for the jaw), and largely uncontrolled
+elsewhere.
+
+> This is a scoping-level synthesis by a student, not a definitive efficacy
+> verdict, and not medical advice.
+
+## Data
+
+```{r}
+library(readr)
+library(dplyr)
+studies <- read_csv("../data/studies.csv", show_col_types = FALSE)
+knitr::kable(studies |> select(authors, year, joint, intervention, design, n, direction, quality))
+```
+
+## Part 1 — Meta-analysis (poolable subset)
+
+The TMJ dextrose-prolotherapy RCTs share a design, population, and comparable
+outcomes, so a pooled estimate is defensible. See `R/01_meta_analysis.R`.
+
+*Effect sizes must be extracted from the full-text papers; the script currently
+uses clearly-labelled synthetic placeholders so the workflow runs — replace them
+with real values before interpreting.*
+
+```{r}
+#| eval: false
+source("../R/01_meta_analysis.R")
+```
+
+## Part 2 — Evidence map (whole literature)
+
+Studies that cannot be pooled are mapped instead: which joints, which
+interventions, how strong. Gaps in the grid are where evidence is missing.
+
+```{r}
+#| fig-width: 9
+#| fig-height: 5
+source("../R/02_evidence_map.R")
+```
+
+## Interpretation
+
+- Controlled evidence is confined to the TMJ; limb and spine joints in actual
+  hEDS patients have only small, uncontrolled case series.
+- No adequately powered RCT exists for peripheral-joint regenerative injections
+  in hEDS — the clearest gap and the case for future work.
+
+## Limitations
+
+Few studies; small samples; heterogeneity; reliance on public search (a formal
+review would query PubMed, Embase, Scopus, Cochrane). Findings are preliminary
+and hypothesis-generating.
+
+## Reproducibility
+
+```{r}
+sessionInfo()
+```
