@@ -61,15 +61,9 @@ forest(x = est, sei = se, slab = slab,
 title("Dextrose prolotherapy vs placebo for TMJ pain (real, cited data)")
 dev.off()
 
-# also render to screen when run interactively
-forest(x = est, sei = se, slab = slab,
-       header = c("Estimate (source)", "SMD [95% CI]"),
-       xlab = "Standardized mean difference (negative = less pain, favors dextrose)",
-       refline = 0, psize = 1.2)
-
 # ---- (D) Print the wider published evidence table --------------------
-pooled_tbl <- read.csv("data/pooled_results.csv", stringsAsFactors = FALSE)
-cat("\nPublished pooled results (see data/pooled_results.csv):\n")
+pooled_tbl <- read.csv("data/raw/pooled_results.csv", stringsAsFactors = FALSE)
+cat("\nPublished pooled results (see data/raw/pooled_results.csv):\n")
 print(pooled_tbl[, c("outcome","source_author","source_year","effect_type","effect","ci_low","ci_high","favors")])
 
 # BOTTOM LINE (real): independent meta-analyses agree that dextrose prolotherapy

@@ -1,4 +1,4 @@
-# Data dictionary — `data/studies.csv`
+# Data dictionary — `data/raw/studies.csv`
 
 One row per study. Descriptive fields are coded from the sources; effect-size
 numbers for the meta-analysis must be extracted from the full-text papers (they

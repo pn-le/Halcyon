@@ -35,29 +35,50 @@ People with joint hypermobility are often offered regenerative injections (PRP, 
 
 ```
 Halcyon/
+├── run_all.R                # one command rebuilds every figure & table
 ├── data/
-│   ├── studies.csv          # coded primary studies (the evidence map)
-│   └── pooled_results.csv   # published pooled estimates, with DOIs
+│   ├── raw/                 # source data, read-only (hand-curated)
+│   │   ├── studies.csv          # coded primary studies (the evidence map)
+│   │   ├── pooled_results.csv   # published pooled estimates, with DOIs
+│   │   ├── prisma_counts.csv    # PRISMA record funnel (search log)
+│   │   └── rob.csv              # risk-of-bias coding per study
+│   └── processed/           # script-generated tables (git-ignored)
 ├── R/
 │   ├── 01_meta_analysis.R   # forest plot (metafor) on real, cited data
-│   └── 02_evidence_map.R    # evidence map + summaries (ggplot2)
+│   ├── 02_evidence_map.R    # evidence map + summaries (ggplot2)
+│   ├── 03_prisma.R          # PRISMA 2020 flow diagram (PRISMA2020)
+│   └── 04_risk_of_bias.R    # risk-of-bias traffic-light plot (robvis)
 ├── report/evidence-synthesis.qmd   # Quarto report tying it together
-├── figures/                 # rendered figures shown above
+├── figures/                 # rendered figures shown above (tracked)
 ├── docs/data-dictionary.md  # what each data column means
+├── renv.lock                # pinned R package versions
 └── halcyon.Rproj            # open this in RStudio
 ```
 
 ## Reproduce it
 
-1. Install [R and RStudio](https://posit.co/download/rstudio-desktop/).
-2. Open `halcyon.Rproj` in RStudio.
-3. Install packages: `install.packages(c("metafor","readr","dplyr","ggplot2"))`
-4. Source `R/02_evidence_map.R` and `R/01_meta_analysis.R`. Figures save to `outputs/`.
-5. Optional: render `report/evidence-synthesis.qmd` for the full report.
+From a fresh clone, one command rebuilds every figure and table:
+
+```r
+renv::restore()      # installs the exact package versions from renv.lock
+source("run_all.R")  # regenerates figures/ and data/processed/
+```
+
+Or from the shell: `Rscript run_all.R`.
+
+Working figures are written to `outputs/` (git-ignored); the README figures are
+copied into `figures/` (tracked). Optionally render the full report with
+`quarto render report/evidence-synthesis.qmd`.
+
+> **Note.** `R/03_prisma.R` and `R/04_risk_of_bias.R` render the PRISMA flow
+> diagram and risk-of-bias plot from `data/raw/prisma_counts.csv` and
+> `data/raw/rob.csv`. Those files ship as templates: until the real search-log
+> counts and per-study appraisals are entered, both scripts **skip** rather than
+> invent numbers, and `run_all.R` still rebuilds everything else.
 
 ## Data & sources
 
-Effect sizes come from published, peer-reviewed meta-analyses and trials (full list with DOIs in `data/pooled_results.csv`), including:
+Effect sizes come from published, peer-reviewed meta-analyses and trials (full list with DOIs in `data/raw/pooled_results.csv`), including:
 
 - Sit et al. 2021, *Sci Rep* — doi:10.1038/s41598-021-94119-2
 - Nagori et al. 2018, *J Oral Rehabil* — doi:10.1111/joor.12698

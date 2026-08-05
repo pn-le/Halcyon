@@ -31,13 +31,13 @@ elsewhere.
 ```{r}
 library(readr)
 library(dplyr)
-studies <- read_csv("../data/studies.csv", show_col_types = FALSE)
+studies <- read_csv("../data/raw/studies.csv", show_col_types = FALSE)
 knitr::kable(studies |> select(authors, year, joint, intervention, design, n, direction, quality))
 ```
 
 ## Part 1 — Meta-analysis (poolable subset)
 
-Real, cited effect sizes (see `R/01_meta_analysis.R` and `data/pooled_results.csv`).
+Real, cited effect sizes (see `R/01_meta_analysis.R` and `data/raw/pooled_results.csv`).
 Independent meta-analyses agree dextrose prolotherapy reduces TMJ pain vs placebo:
 Sit et al. 2021 pooled SMD −0.76 (95% CI −1.19 to −0.32), I²=0%
 (doi:10.1038/s41598-021-94119-2); Nagori et al. 2018 pain MD −1.00 and mouth-opening
